@@ -11,25 +11,23 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
 SECRET_KEY = '%d!u9y7eu)##s@125+(0s#j2&52u_yd5aqonzvcjr=(*@_-8$9'
-
-
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-ALLOWED_HOSTS = ['easynote.uxp.ru']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -41,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
+    'sharedNotes',
+    'ckeditor',
+
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,12 @@ TEMPLATES = [
         },
     },
 ]
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'auto',
+
+    },
+}
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
@@ -80,11 +87,8 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'a0397412_notes',
-        'USER': 'a0397412_notes',
-        'PASSWORD': '7AxhCETx',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -111,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -119,8 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = "/var/www/example.com/static/"
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(PROJECT_ROOT, 'static'), ]
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')

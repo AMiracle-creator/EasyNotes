@@ -1,4 +1,5 @@
 import os, sys
+
 activate_this = '/home/a0397412/python/bin/activate_this.py'
 with open(activate_this) as f:
   exec(f.read(), {'__file__': activate_this})

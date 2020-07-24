@@ -59,20 +59,13 @@
 
 </head>
 
-<body>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 
 <div class="limiter">
 
     <div class="container-login100">
 
         <div class="wrap-login100 p-t-50 p-b-90">
+            <img src="{% static 'login/images/logo500.png' %}" style="padding: 20%" class="img-fluid" alt="Responsive image">
 
             <form class="login100-form validate-form flex-sb flex-w" method="POST" action="../signup/">
 
@@ -86,7 +79,7 @@
 
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Name is required">
 
-                    <input class="input100" type="text" name="name" placeholder="Name">
+                    <input id="name_text" class="input100" type="text" name="name" placeholder="Name">
 
                     <span class="focus-input100"></span>
 
@@ -94,7 +87,7 @@
 
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Email is required">
 
-                    <input class="input100" type="text" name="email" placeholder="Email">
+                    <input id="email_text" class="input100" type="text" name="email" placeholder="Email">
 
                     <span class="focus-input100"></span>
 
@@ -103,7 +96,7 @@
 
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
 
-                    <input class="input100" type="password" name="pass" placeholder="Password">
+                    <input id="pass1" class="input100" type="password" name="pass" placeholder="Password">
 
                     <span class="focus-input100"></span>
 
@@ -111,7 +104,7 @@
 
                 <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
 
-                    <input class="input100" type="password" name="reppass" placeholder="Repeat Password">
+                    <input id="pass2" class="input100" type="password" name="reppass" placeholder="Repeat Password">
 
                     <span class="focus-input100"></span>
 
@@ -129,7 +122,7 @@
 
                 <div class="container-login100-form-btn m-t-17">
 
-                    <button type="submit" class="login100-form-btn">
+                    <button id="reg_btn" type="submit" class="login100-form-btn">
 
                         Register
 
@@ -149,6 +142,28 @@
 
 <div id="dropDownSelect1"></div>
 
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Предпупреждение.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ ans_mess }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 <!--===============================================================================================-->
 
@@ -179,6 +194,27 @@
 <script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
 
 <!--===============================================================================================-->
+
+<script>
+    {% if ctx %}
+
+        document.getElementById('name_text').value = "{{ ctx.name }}";
+        document.getElementById('email_text').value = "{{ ctx.email }}";
+        document.getElementById('pass1').value = "{{ ctx.pass }}";
+        document.getElementById('pass2').value = "{{ ctx.reppass }}";
+
+        $(document).ready(function () {
+            $('.bd-example-modal-sm').modal('show').delay(500).modal('hide');
+
+            setTimeout(function () {
+                $('.bd-example-modal-sm').modal('hide');
+            }, 5000);
+        });
+
+    {% endif %}
+
+</script>
+
 
 <script src="{% static 'login/js/main.js' %}"></script>
 

@@ -9,15 +9,19 @@ class TaskForm(ModelForm):
         widgets = {
             "note_title": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': r'Название'
+                'placeholder': r'Название',
+                'maxlength': 100
 
             }),
             "note_text": Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': r'Заметка'
+                'placeholder': r'Заметка',
+                'maxlength': 3000
             }),
-            "note_tags": Textarea(attrs={
+            "note_tags": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': r'Тэги'
+                'placeholder': r'Тэги',
+                'maxlength': 30
             }),
         }
+

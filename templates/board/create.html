@@ -10,6 +10,7 @@
       {% csrf_token %}
       {{form.note_title}}<br>
       {{form.note_text}}<br>
+      {{ form.media }}
       {{form.note_tags}}<br>
       <button type="submit" class="btn btn-success">Добавить</button>
       <span>{{error}}</span>
